@@ -30,12 +30,14 @@ class DivideArrayController extends Controller
         $number = (int)$this->number;
         $userId = (int)$this->userid;
         $result = $this->arrayDivider->getSeparatorIndex($array, $number);
+
         $divideResultModel = new DivideResult();
         if ($userId) {
             $divideResultModel->user_id = $userId;
         }
         $divideResultModel->result = $result;
         $divideResultModel->save();
+        
         echo $result;
     }
 }

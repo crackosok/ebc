@@ -4,7 +4,8 @@ namespace app\models;
 
 class ArrayDivider 
 {
-    public function getSeparatorIndex(array $array, int $number) {
+    public function getSeparatorIndex(array $array, int $number) 
+    {
         $separatorIndex = -1;
         $leftCount = 0;
         $rightCount = 0;

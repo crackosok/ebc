@@ -3,9 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use app\models\ArrayDivider;
 use app\models\DivideResult;
 use yii\filters\auth\HttpBearerAuth;
@@ -34,10 +32,12 @@ class DivideController extends Controller
         $array = $request->post('array');
         $number = $request->post('number'); 
         $result = $this->arrayDivider->getSeparatorIndex($array, $number);
+
         $divideResultModel = new DivideResult();
         $divideResultModel->user_id = Yii::$app->user->getId();
         $divideResultModel->result = $result;
         $divideResultModel->save();
+        
         return [
             'index' => $result
         ];
