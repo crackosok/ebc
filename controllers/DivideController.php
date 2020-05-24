@@ -8,10 +8,18 @@ use yii\web\Controller;
 use yii\web\Response;
 use app\models\ArrayDivider;
 use app\models\DivideResult;
+use yii\filters\auth\HttpBearerAuth;
 
 class DivideController extends Controller 
 {
     protected $arrayDivider;
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator']['class'] = HttpBearerAuth::className();
+        return $behaviors;
+    }
 
     public function __construct($id, $module, ArrayDivider $arrayDivider)
     {
@@ -27,6 +35,7 @@ class DivideController extends Controller
         $number = $request->post('number'); 
         $result = $this->arrayDivider->getSeparatorIndex($array, $number);
         $divideResultModel = new DivideResult();
+        $divideResultModel->user_id = Yii::$app->user->getId();
         $divideResultModel->result = $result;
         $divideResultModel->save();
         return $result;
