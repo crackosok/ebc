@@ -38,6 +38,8 @@ class DivideController extends Controller
         $divideResultModel->user_id = Yii::$app->user->getId();
         $divideResultModel->result = $result;
         $divideResultModel->save();
-        return $result;
+        return [
+            'index' => $result
+        ];
     }
 }
